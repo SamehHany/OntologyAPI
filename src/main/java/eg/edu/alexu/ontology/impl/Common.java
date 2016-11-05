@@ -5,7 +5,6 @@
  */
 package eg.edu.alexu.ontology.impl;
 
-import eg.edu.alexu.ontology.IOntology;
 import eg.edu.alexu.ontology.IOntologyElement;
 import eg.edu.alexu.util.KeyedSet;
 import java.util.Set;

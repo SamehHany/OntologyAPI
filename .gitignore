@@ -24,4 +24,10 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# Executables
+git-add-untracked
+git-list-ever-tracked
+git-list-tracked
+git-list-untracked
+
 

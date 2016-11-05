@@ -14,7 +14,6 @@ import eg.edu.alexu.ontology.IObjectProperty;
 import eg.edu.alexu.ontology.IOntology;
 import eg.edu.alexu.ontology.IProperty;
 import eg.edu.alexu.ontology.IRelation;
-import eg.edu.alexu.util.KeyedSet;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Set;

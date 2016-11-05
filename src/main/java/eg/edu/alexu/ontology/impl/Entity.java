@@ -7,7 +7,6 @@ package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IEntity;
 import eg.edu.alexu.ontology.IOntology;
-import eg.edu.alexu.ontology.IOntologyElement;
 import java.net.URI;
 
 /**
