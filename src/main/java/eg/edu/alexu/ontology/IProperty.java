@@ -12,6 +12,6 @@ import java.util.Set;
  * @author sameh
  */
 public interface IProperty extends IOntologyElement {
-    Set<IConcept> getDomain();
-    IEntity getRange();
+    Set<IClass> getDomain();
+    Set<? extends IEntity> getRange();
 }

@@ -5,11 +5,13 @@
  */
 package eg.edu.alexu.ontology;
 
+import java.util.Set;
+
 /**
  *
  * @author sameh
  */
 public interface IDataProperty extends IProperty {
     @Override
-    IDatatype getRange();
+    Set<IDatatype> getRange();
 }

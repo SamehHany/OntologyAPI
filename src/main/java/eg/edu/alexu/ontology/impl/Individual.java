@@ -6,11 +6,12 @@
 package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IAttribute;
-import eg.edu.alexu.ontology.IConcept;
+import eg.edu.alexu.ontology.IClass;
 import eg.edu.alexu.ontology.IIndividual;
 import eg.edu.alexu.ontology.IRelation;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,16 +20,19 @@ import java.util.Set;
  */
 public class Individual extends Item implements IIndividual {
     
-    private Set<IConcept> types;
+    private Set<IClass> types;
     private Set<IAttribute> attributes;
     private Set<IRelation> relations;
 
-    public Individual(URI id) {
+    public Individual(ID id) {
         super(id);
+        types = new HashSet<>();
+        attributes = new HashSet<>();
+        relations = new HashSet<>();
     }
 
     @Override
-    public Set<IConcept> getType() {
+    public Set<IClass> getType() {
         return Collections.unmodifiableSet(types);
     }
 

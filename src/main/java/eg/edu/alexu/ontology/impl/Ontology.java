@@ -6,17 +6,24 @@
 package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IAttribute;
-import eg.edu.alexu.ontology.IConcept;
+import eg.edu.alexu.ontology.IClass;
 import eg.edu.alexu.ontology.IDataProperty;
+import eg.edu.alexu.ontology.IDatatype;
 import eg.edu.alexu.ontology.IIndividual;
 import eg.edu.alexu.ontology.ILiteral;
 import eg.edu.alexu.ontology.IObjectProperty;
 import eg.edu.alexu.ontology.IOntology;
 import eg.edu.alexu.ontology.IProperty;
 import eg.edu.alexu.ontology.IRelation;
+import eg.edu.alexu.ontology.common.ID;
+import java.io.File;
 import java.net.URI;
 import java.util.Collections;
 import java.util.Set;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 /**
  *
@@ -24,35 +31,86 @@ import java.util.Set;
  */
 public class Ontology extends OntologyElement implements IOntology {
     
-    private String namespace;
-    private Set<IConcept> concepts;
-    private Set<IObjectProperty> objectProperties;
-    private Set<IDataProperty> dataProperties;
-    private Set<IIndividual> individuals;
-    private Set<ILiteral> literals;
+    protected URI namespace;
+    protected Set<IClass> classes;
+    protected Set<IObjectProperty> objectProperties;
+    protected Set<IDataProperty> dataProperties;
+    protected Set<IDatatype> datatypes;
+    protected Set<IIndividual> individuals;
+    protected Set<ILiteral> literals;
     
-    private Ontology(URI id) {
+    public Ontology(ID id) {
         super(id);
+        namespace = null;
+        classes = Common.getSet(IClass.class);
+        objectProperties = Common.getSet(IObjectProperty.class);
+        dataProperties = Common.getSet(IDataProperty.class);
+        datatypes = Common.getSet(IDatatype.class);
+        individuals = Common.getSet(IIndividual.class);
+        literals = Common.getSet(ILiteral.class);
     }
     
-    public Ontology(URI id, String filename) {
+    public Ontology(ID id, String filename)
+            throws OWLOntologyCreationException {
         this(id);
-        // Continue...
+        OWLOntology ontology = getOntologyFromFile(filename);
+        AddToOntologyVisitor visitor = new AddToOntologyVisitor(this);
+        ontology.accept(visitor);
     }
     
-    public Ontology(URI id, IOntology ontology) {
+    private OWLOntology getOntologyFromFile(String filename)
+            throws OWLOntologyCreationException {
+        File file = new File(filename);
+        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+        OWLOntology ontology = null;
+        ontology = manager.loadOntologyFromOntologyDocument(file);
+        
+        return ontology;
+    }
+    
+//    private void buildFromFile(String filename) {
+//        File file = new File(filename);
+//        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+//        OWLOntology ontology = null;
+//        try {
+//            ontology = manager.loadOntologyFromOntologyDocument(file);
+//            
+//            
+//        } catch (OWLOntologyCreationException ex) {
+//            Logger.getLogger(Ontology.class.getName()).log(Level.SEVERE, null,
+//                    ex);
+//        }
+//        
+//        AddToOntologyVisitor addVisitor = new AddToOntologyVisitor(this);
+//        ontology.accept(addVisitor);
+//        for (OWLClass clss : ontology.getClassesInSignature()) {
+//            clss.accept(addVisitor);
+//        }
+//        
+//        for (OWLObjectProperty property :
+//                ontology.getObjectPropertiesInSignature()) {
+//            property.accept(addVisitor);
+//        }
+//        
+//        for (OWLDataProperty property :
+//                ontology.getDataPropertiesInSignature()) {
+//            property.accept(addVisitor);
+//        }
+//    }
+    
+    public Ontology(ID id, IOntology ontology) {
         this(id);
         // Continue...
     }
 
     @Override
-    public String getNamespace() {
+    public URI getNamespace() {
         return namespace;
     }
 
     @Override
-    public Set<IConcept> getConcepts() {
-        return Collections.unmodifiableSet(concepts);
+    public Set<IClass> getClasses() {
+        return Collections.unmodifiableSet(classes);
     }
 
     @Override
@@ -104,6 +162,11 @@ public class Ontology extends OntologyElement implements IOntology {
     @Override
     public IOntology getOntology() {
         return this;
+    }
+
+    @Override
+    public Set<IDatatype> getDatatypes() {
+        return Collections.unmodifiableSet(datatypes);
     }
     
 }

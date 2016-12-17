@@ -34,6 +34,14 @@ public class KeyedSet<K, V> implements Set<V> {
         map = new HashMap<>(size);
         this.function = function;
     }
+    
+    public V get(K key) {
+        return map.get(key);
+    }
+    
+    public boolean hasKey(K k) {
+        return map.containsKey(k);
+    }
 
     @Override
     public int size() {
@@ -47,7 +55,11 @@ public class KeyedSet<K, V> implements Set<V> {
 
     @Override
     public boolean contains(Object o) {
-        return map.containsKey(function.apply((V)o));
+        try {
+            return map.containsKey(function.apply((V) o));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -103,14 +115,22 @@ public class KeyedSet<K, V> implements Set<V> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return map.values().containsAll(c);
+        try {
+            Set<K> keys = new HashSet<>();
+            for (Object v : c) {
+                keys.add(function.apply((V) v));
+            }
+            return map.keySet().containsAll(keys);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean addAll(Collection<? extends V> c) {
         boolean changed = false;
         for (V v : c) {
-            if (!add(v)) {
+            if (add(v)) {
                 changed = true;
             }
         }

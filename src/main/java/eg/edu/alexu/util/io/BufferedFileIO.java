@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eg.edu.alexu.ontology;
-
-import java.util.Set;
+package eg.edu.alexu.util.io;
 
 /**
  *
  * @author sameh
  */
-public interface IKnowledge {
-    Set<IOntology> getOntologies();
-    void addOntology(IOntology ontology);
+public interface BufferedFileIO {
+    String getFileName();
 }

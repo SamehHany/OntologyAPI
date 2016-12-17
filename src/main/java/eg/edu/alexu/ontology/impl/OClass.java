@@ -5,24 +5,35 @@
  */
 package eg.edu.alexu.ontology.impl;
 
-import eg.edu.alexu.ontology.IConcept;
+import eg.edu.alexu.ontology.IClass;
 import eg.edu.alexu.ontology.IDataProperty;
 import eg.edu.alexu.ontology.IObjectProperty;
 import eg.edu.alexu.ontology.IOntology;
 import eg.edu.alexu.ontology.IProperty;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  *
  * @author sameh
  */
-public class Concept extends Entity implements IConcept {
+public class OClass extends Entity implements IClass {
     
-    private Set<IObjectProperty> objectProperties;
-    private Set<IDataProperty> dataProperties;
+    protected Set<IObjectProperty> objectProperties;
+    protected Set<IDataProperty> dataProperties;
+    
+    public OClass(ID id) {
+        super(id);
+        objectProperties = new HashSet<>();
+        dataProperties = new HashSet<>();
+    }
 
-    public Concept(URI id, IOntology ontology) {
+    public OClass(IOntology ontology) {
+        super(ontology);
+    }
+    
+    public OClass(ID id, IOntology ontology) {
         super(id, ontology);
     }
 
@@ -42,10 +53,10 @@ public class Concept extends Entity implements IConcept {
     }
 
     @Override
-    public Set<IConcept> getAdjacent() {
-        Set<IConcept> adjacents = Common.getSet(IConcept.class);
+    public Set<IClass> getAdjacent() {
+        Set<IClass> adjacents = Common.getSet(IClass.class);
         for (IObjectProperty property : objectProperties) {
-            adjacents.add(property.getRange());
+            adjacents.addAll(property.getRange());
         }
         
         return adjacents;

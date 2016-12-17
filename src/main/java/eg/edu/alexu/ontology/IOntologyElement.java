@@ -5,6 +5,7 @@
  */
 package eg.edu.alexu.ontology;
 
+import eg.edu.alexu.ontology.common.ID;
 import java.net.URI;
 
 /**
@@ -12,6 +13,6 @@ import java.net.URI;
  * @author sameh
  */
 public interface IOntologyElement {
-    URI getId();
+    ID getId();
     IOntology getOntology();
 }

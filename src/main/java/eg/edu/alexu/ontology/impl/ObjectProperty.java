@@ -5,22 +5,36 @@
  */
 package eg.edu.alexu.ontology.impl;
 
-import eg.edu.alexu.ontology.IConcept;
+import eg.edu.alexu.ontology.IClass;
+import eg.edu.alexu.ontology.IObjectProperty;
 import eg.edu.alexu.ontology.IOntology;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author sameh
  */
-public class ObjectProperty extends Property {
+public class ObjectProperty extends Property implements IObjectProperty {
+    
+    public ObjectProperty(ID id) {
+        super(id);
+    }
 
-    public ObjectProperty(URI id, IOntology ontology, IConcept range) {
-        super(id, ontology, range);
+    public ObjectProperty(ID id, IOntology ontology, IClass range) {
+        super(id, ontology);
+        this.ranges = new HashSet<IClass>();
+        ((Set<IClass>)this.ranges).add(range);
     }
     
     @Override
-    public IConcept getRange() {
-        return (IConcept)super.getRange();
+    public Set<IClass> getRange() {
+        return (Set<IClass>)super.getRange();
+    }
+
+    @Override
+    public IObjectProperty getInverse() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

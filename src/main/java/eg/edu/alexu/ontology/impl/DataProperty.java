@@ -5,22 +5,31 @@
  */
 package eg.edu.alexu.ontology.impl;
 
+import eg.edu.alexu.ontology.IDataProperty;
 import eg.edu.alexu.ontology.IDatatype;
 import eg.edu.alexu.ontology.IOntology;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author sameh
  */
-public class DataProperty extends Property {
+public class DataProperty extends Property implements IDataProperty {
+    
+    public DataProperty(ID id) {
+        super(id);
+    }
 
-    public DataProperty(URI id, IOntology ontology, IDatatype range) {
-        super(id, ontology, range);
+    public DataProperty(ID id, IOntology ontology, IDatatype range) {
+        super(id, ontology);
+        this.ranges = new HashSet<IDatatype>();
+        ((Set<IDatatype>)this.ranges).add(range);
     }
     
     @Override
-    public IDatatype getRange() {
-        return (IDatatype)super.getRange();
+    public Set<IDatatype> getRange() {
+        return (Set<IDatatype>)super.getRange();
     }
 }

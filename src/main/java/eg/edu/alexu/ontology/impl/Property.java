@@ -5,12 +5,13 @@
  */
 package eg.edu.alexu.ontology.impl;
 
-import eg.edu.alexu.ontology.IConcept;
+import eg.edu.alexu.ontology.IClass;
 import eg.edu.alexu.ontology.IEntity;
 import eg.edu.alexu.ontology.IOntology;
 import eg.edu.alexu.ontology.IProperty;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,29 +19,39 @@ import java.util.Set;
  * @author sameh
  */
 public abstract class Property extends OntologyElement implements IProperty {
-    private IOntology ontology;
-    private Set<IConcept> domains;
-    private IEntity range;
-
-    protected Property(URI id, IOntology ontology, IEntity range) {
+    protected IOntology ontology;
+    protected Set<IClass> domains;
+    protected Set<? extends IEntity> ranges;
+    
+    public Property(ID id) {
         super(id);
-        this.ontology = ontology;
-        domains = Common.getSet(IConcept.class);
-        this.range = range;
+        domains = new HashSet<>();
+        this.ranges = new HashSet<IEntity>();
     }
     
-    public void addDomain(IConcept concept) {
-        domains.add(concept);
+    public Property(ID id, IOntology ontology) {
+        super(id);
+        this.ontology = ontology;
+        domains = Common.getSet(IClass.class);
+    }
+
+    public Property(ID id, IOntology ontology, IEntity range) {
+        this(id, ontology);
+        ((Set<IEntity>)this.ranges).add(range);
+    }
+    
+    public void addDomain(IClass clss) {
+        domains.add(clss);
     }
 
     @Override
-    public Set<IConcept> getDomain() {
+    public Set<IClass> getDomain() {
         return Collections.unmodifiableSet(domains);
     }
 
     @Override
-    public IEntity getRange() {
-        return range;
+    public Set<? extends IEntity> getRange() {
+        return ranges;
     }
 
     @Override

@@ -5,13 +5,11 @@
  */
 package eg.edu.alexu.ontology;
 
-import java.util.Set;
-
 /**
  *
  * @author sameh
  */
-public interface IKnowledge {
-    Set<IOntology> getOntologies();
-    void addOntology(IOntology ontology);
+public interface ITag <T> {
+    String getName();
+    T getValue();
 }

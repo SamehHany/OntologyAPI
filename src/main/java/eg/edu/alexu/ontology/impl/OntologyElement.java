@@ -6,7 +6,7 @@
 package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IOntologyElement;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
 
 /**
  *
@@ -14,15 +14,33 @@ import java.net.URI;
  */
 public abstract class OntologyElement implements IOntologyElement {
     
-    private URI id;
+    protected ID id;
     
-    public OntologyElement(URI id) {
+    public OntologyElement(ID id) {
         this.id = id;
     }
 
     @Override
-    public URI getId() {
+    public ID getId() {
         return id;
     }
     
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof OntologyElement) {
+            return id.equals(((OntologyElement)obj).id);
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        return "<" + id + ">";
+    }
 }

@@ -17,6 +17,6 @@ class Common {
     public static final String NAME_SEPARATOR = ".";
     
     protected static <T extends IOntologyElement> Set<T> getSet(Class<T> clss) {
-        return new KeyedSet<>((t) -> t.getId());
+        return new KeyedSet<>((T t) -> t.getId());
     }
 }

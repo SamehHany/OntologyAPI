@@ -5,6 +5,7 @@
  */
 package eg.edu.alexu.ontology;
 
+import java.net.URI;
 import java.util.Set;
 
 /**
@@ -12,8 +13,8 @@ import java.util.Set;
  * @author sameh
  */
 public interface IOntology extends IOntologyElement {
-    String getNamespace();
-    Set<IConcept> getConcepts();
+    URI getNamespace();
+    Set<IClass> getClasses();
     Set<IProperty> getProperties();
     Set<IObjectProperty> getObjectProperties();
     Set<IDataProperty> getDataProperties();
@@ -21,4 +22,5 @@ public interface IOntology extends IOntologyElement {
     Set<ILiteral> getLiterals();
     Set<IRelation> getRelations();
     Set<IAttribute> getAttributes();
+    Set<IDatatype> getDatatypes();
 }

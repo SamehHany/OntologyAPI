@@ -11,8 +11,6 @@ import java.util.Set;
  *
  * @author sameh
  */
-public interface IConcept extends IEntity, Connectable {
-    Set<IProperty> getProperties();
-    Set<IObjectProperty> getObjectProperties();
-    Set<IDataProperty> getDataProperties();
+public interface Taggable {
+    Set<ITag> getTags();
 }

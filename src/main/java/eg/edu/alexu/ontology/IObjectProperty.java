@@ -5,12 +5,14 @@
  */
 package eg.edu.alexu.ontology;
 
+import java.util.Set;
+
 /**
  *
  * @author sameh
  */
 public interface IObjectProperty extends IProperty {
     @Override
-    IConcept getRange();
+    Set<IClass> getRange();
     IObjectProperty getInverse();
 }

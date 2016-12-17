@@ -12,7 +12,7 @@ import java.util.Set;
  * @author sameh
  */
 public interface IIndividual extends IItem, Connectable {
-    Set<IConcept> getType();
+    Set<IClass> getType();
     Set<IRelation> getRelations();
     Set<IAttribute> getAttributes();
 }

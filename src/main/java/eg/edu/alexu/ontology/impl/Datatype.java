@@ -7,7 +7,7 @@ package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IDatatype;
 import eg.edu.alexu.ontology.IOntology;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
 
 /**
  *
@@ -19,8 +19,12 @@ public class Datatype<T>  extends Entity implements IDatatype<T> {
     
     private static final String DATATYPE_NAME_SEPARATOR = "#";
     
+    public Datatype(ID id) {
+        super(id);
+    }
+    
     public Datatype(Class<T> type, IOntology ontology) {
-        super(URI.create(type.getName()), ontology);
+        super(new ID(type.getName()), ontology);
         this.type = type;
     }
 

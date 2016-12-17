@@ -11,7 +11,8 @@ import java.util.Set;
  *
  * @author sameh
  */
-public interface IKnowledge {
-    Set<IOntology> getOntologies();
-    void addOntology(IOntology ontology);
+public interface IClass extends IEntity, Connectable {
+    Set<IProperty> getProperties();
+    Set<IObjectProperty> getObjectProperties();
+    Set<IDataProperty> getDataProperties();
 }

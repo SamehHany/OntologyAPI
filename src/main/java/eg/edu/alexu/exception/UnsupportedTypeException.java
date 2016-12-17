@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eg.edu.alexu.ontology;
-
-import java.util.Set;
+package eg.edu.alexu.exception;
 
 /**
  *
  * @author sameh
  */
-public interface IKnowledge {
-    Set<IOntology> getOntologies();
-    void addOntology(IOntology ontology);
+public class UnsupportedTypeException extends Exception {
+    
+    public <T> UnsupportedTypeException(T obj) {
+        super("Unsupported Type: " + obj.getClass().getName());
+    }
 }

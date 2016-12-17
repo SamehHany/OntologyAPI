@@ -7,7 +7,7 @@ package eg.edu.alexu.ontology.impl;
 
 import eg.edu.alexu.ontology.IItem;
 import eg.edu.alexu.ontology.IOntology;
-import java.net.URI;
+import eg.edu.alexu.ontology.common.ID;
 
 /**
  *
@@ -17,11 +17,11 @@ public abstract class Item extends OntologyElement implements IItem {
     
     private IOntology ontology;
 
-    public Item(URI id) {
+    public Item(ID id) {
         super(id);
     }
     
-    public Item(URI id, IOntology ontology) {
+    public Item(ID id, IOntology ontology) {
         super(id);
         this.ontology = ontology;
     }
